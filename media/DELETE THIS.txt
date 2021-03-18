@@ -1,0 +1,2 @@
+is is only here so that the directory for media files is included in the git repo. 
+Once files are used in here, this should be removed.
