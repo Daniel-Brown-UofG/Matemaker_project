@@ -2,6 +2,10 @@
 __pycache__/
 *.py[cod]
 *$py.class
+.pyc
+.DS_Store
+*.key
+thumbs.db
 
 # C extensions
 *.so
