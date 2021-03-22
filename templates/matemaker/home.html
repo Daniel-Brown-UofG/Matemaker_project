@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load matemaker_template_tags %}
 <html>
 <head>
 <style>
@@ -16,10 +17,10 @@ table {font-family: Verdana; color: white; position: relative; top:100px}
 <h1>Matemaker</h1>
 <p>Find freinds today</p>
 
-<a href= "{% url matemaker:login %}">login</a>
+<a href= "{% url 'matemaker:login' %}">login</a>
 
 <div class = "a1">
-<a href="signup page">signup</a>
+<a href="{% url 'matemaker:register' %}">register</a>
 </div>
 
 <div class = "a2">
