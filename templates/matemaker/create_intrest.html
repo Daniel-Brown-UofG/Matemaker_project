@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h1 {font-family: verdana; color: white;}
+body {background-color: black;}
+.name {font-family:verdana; color:white; padding-bottom: 30px;}
+.genre {font-family:verdana; color:white; postion: relative; right: 875px; padding-bottom: 30px;}
+.submit {font-family:verdana; position: relative; top: 500px; right: 500px;}
+p {font-family:verdana; color:white; postion: relative; right: 875px; padding-bottom: 30px;}
+</style>
+
+<h1>Create Intrest</h1>
+
+<form id="intrest_form" method="post" action="{% url 'matemaker:intrests' %}">
+<div class = "name">
+Name: <input type="text" name="name" value="" size="50" />
+</div>
+<p>Description</p>
+<textarea rows = "10" cols = "50" name= "description">
+</textarea>
+
+<div class = "genre">
+  <p>Genre</p>
+  <select class="genres">
+  <option value="Select">Select....</option>
+  <option value="Sport">Sport</option>
+  <option value="TV">TV</option>
+  <option value="Cooking">Cooking</option>
+</div>
+<br/>
+
+<div class = "submit">
+<input type="submit" value="Create Intrest" />
+</div>
+</form>
