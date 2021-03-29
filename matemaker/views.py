@@ -115,3 +115,7 @@ def add_genre(request):
             print(form.errors)
 
     return render(request, 'matemaker/add_genre.html', {'form': form})
+
+def genres(request):
+    context_dict = {}
+    return render (request, 'matemaker/genres.html', context=context_dict)
