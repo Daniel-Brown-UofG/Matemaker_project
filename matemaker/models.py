@@ -9,6 +9,8 @@ class Genre(models.Model):
 	members = models.IntegerField(default=0)
 	date = models.DateTimeField('date created',null=True)
 
+	class Meta:
+		verbose_name_plural = "Genres"
 
 	def __str__(self): 
 		return self.name

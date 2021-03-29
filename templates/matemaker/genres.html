@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Genres page </title>
+    </head>
+    <body>
+        {% if genres %}
+            <ul>
+            {% for g in genres %}
+                <li>
+                <h1>  {{ g.name }} </h1>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <h1> No genres found </h1>
+        {% endif %}
+        <a href = "{% url 'matemaker:add_genre' %}">add genre </a>
+    </body>
+</html>

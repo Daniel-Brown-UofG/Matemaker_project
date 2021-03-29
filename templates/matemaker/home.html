@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% load matemaker_template_tags %}
 <html>
 <head>
 <style>
@@ -24,7 +23,7 @@ table {font-family: Verdana; color: white; position: relative; top:100px}
 </div>
 
 <div class = "a2">
-<a href="Genre page">Genre</a>
+<a href="{% url 'matemaker:genres' %}">Genres</a>
 </div>
 
 <table style="width:500px">
