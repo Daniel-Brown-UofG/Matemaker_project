@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <title>Example</title>
 <style>
@@ -34,3 +35,25 @@ body {background-color: #659DBD;}
 <div class= "a">
 <a href url="add genre">Add Genre</a>
 </div>
+=======
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Genres page </title>
+    </head>
+    <body>
+        {% if genres %}
+            <ul>
+            {% for g in genres %}
+                <li>
+                <h1>  {{ g.name }} </h1>
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <h1> No genres found </h1>
+        {% endif %}
+        <a href = "{% url 'matemaker:add_genre' %}">add genre </a>
+    </body>
+</html>
+>>>>>>> ccaaccb6714c2063fe5eae87b6ddc513cb8e63a1

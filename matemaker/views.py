@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from matemaker.models import UserProfile
-from matemaker.forms import UserForm, UserProfileForm
+from matemaker.forms import UserForm, UserProfileForm, GenreForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -99,3 +99,23 @@ def user_logout(request):
 
 def restricted(request):
     return render(request, 'rango/restricted.html')
+
+@login_required
+def add_genre(request):
+    form = GenreForm()
+
+    if request.method == 'POST':
+        form = GenreForm(request.POST)
+        # if form is valid redirect to genres page, not home. 
+        if form.is_valid():
+                form.save(commit=True)
+                return redirect('matemaker/genres/')
+
+        else: 
+            print(form.errors)
+
+    return render(request, 'matemaker/add_genre.html', {'form': form})
+
+def genres(request):
+    context_dict = {}
+    return render (request, 'matemaker/genres.html', context=context_dict)
