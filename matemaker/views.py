@@ -53,7 +53,7 @@ def register(request):
         profile_form = UserProfileForm()
 
     # Render template depending on context
-    return render(request, 'matemaker/register.html', context = {'user_form': user_form,
+    return render(request, 'matemaker/signuppage.html', context = {'user_form': user_form,
                                                             'profile_form': profile_form,
                                                             'registered': registered})
 
