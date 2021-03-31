@@ -1,15 +1,16 @@
 <!doctype html>
-<title>Homepage</title>
+<title>Profilepage</title>
 <style>
 body {
   background-color: #659DBD;
   display: grid;
   grid-template-areas:
-    "header header header"
-    "nav article ads"
-    "nav footer footer";
-  grid-template-rows: 80px 1fr 70px;
-  grid-template-columns: 20% 1fr 15%;
+    "nav header"
+    "nav article"
+    "nav ads"
+    "nav footer";
+  grid-template-rows: 80px 1fr 70px 70px;
+  grid-template-columns: 20% 1fr;
   grid-row-gap: 10px;
   grid-column-gap: 10px;
   height: 100vh;
@@ -19,7 +20,7 @@ header, footer, article, nav, div {
   padding: 1.2em;
   background: #DAAD86;
   font-family: Verdana;
-  color: #FBEEC1;}
+  color: #FBEEC1;
   }
 #pageHeader {
   grid-area: header;
@@ -51,12 +52,12 @@ header, footer, article, nav, div {
 }
 </style>
 <body>
-  <header id="pageHeader">Matemaker Project</header>
-  <article id="mainArticle">Genres</article>
-  <nav id="mainNav">Button</nav>
-  <div id="siteAds">
-    <a href="login page">log in</a>
-    <a href="signup page">sign up</a>
-  </div>
-  <footer id="pageFooter">Make freinds today</footer>
+  <header id="pageHeader">Your Profile</header>
+  <article id="mainArticle">Image</article>
+  <nav id="mainNav">Your intrests</nav>
+  <div id="siteAds">Details</div>
+  <footer id="pageFooter">
+    <a href="edit intrests">Edit Intrests</a>
+    <a href="delete account">Delete Account</a>
+  </footer>
 </body>

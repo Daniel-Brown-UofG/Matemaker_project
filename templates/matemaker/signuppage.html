@@ -6,16 +6,25 @@ h1 {font-family: verdana; color: #FBEEC1;}
 body {background-color: #659DBD;}
 .username {font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
 .password {font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
+.cpassword{font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
+.image{font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
 </style>
 
-<h1>Login to Matemaker</h1>
+<h1>Sign up for Matemaker</h1>
 <form id="login_form" method="post" action="{% url 'matemaker:login' %}">
+<div class= "image">
+  Image:
+  <br>
+  <input type="image" name="profilepicture" value ="">
+<input type="submit" value="Add profile picture" />
 <div class = "username">
 Username: <input type="text" name="username" value="" size="50" />
 </div>
 <div class = "password">
 Password: <input type="password" name="password" value="" size="50" />
 </div>
-
-<input type="submit" value="Submit" />
+<div class = "cpassword">
+Password: <input type="password" name="confirm password" value="" size="50" />
+</div>
+<input type="submit" value="SignUp" />
 </form>

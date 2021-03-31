@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+h1 {font-family: verdana; color: #FBEEC1;}
+body {background-color: #659DBD;}
+.name {font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
+</style>
+
+<h1>Create Genre</h1>
+<form id="login_form" method="post" action="{% url 'matemaker:login' %}">
+<div class = "name">
+Username: <input type="text" name="genrename" value="" size="50" />
+</div>
+<input type="submit" value="Create Genre"/>
+</form>

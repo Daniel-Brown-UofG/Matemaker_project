@@ -1,15 +1,15 @@
 <!doctype html>
-<title>Homepage</title>
+<title>CSS Grid Template 7</title>
 <style>
 body {
-  background-color: #659DBD;
   display: grid;
   grid-template-areas:
-    "header header header"
-    "nav article ads"
-    "nav footer footer";
-  grid-template-rows: 80px 1fr 70px;
-  grid-template-columns: 20% 1fr 15%;
+    "nav header"
+    "nav article"
+    "nav ads"
+    "nav footer";
+  grid-template-rows: 80px 1fr 70px 70px;
+  grid-template-columns: 20% 1fr;
   grid-row-gap: 10px;
   grid-column-gap: 10px;
   height: 100vh;
@@ -17,9 +17,7 @@ body {
   }
 header, footer, article, nav, div {
   padding: 1.2em;
-  background: #DAAD86;
-  font-family: Verdana;
-  color: #FBEEC1;}
+  background: yellowgreen;
   }
 #pageHeader {
   grid-area: header;
@@ -51,12 +49,9 @@ header, footer, article, nav, div {
 }
 </style>
 <body>
-  <header id="pageHeader">Matemaker Project</header>
-  <article id="mainArticle">Genres</article>
-  <nav id="mainNav">Button</nav>
-  <div id="siteAds">
-    <a href="login page">log in</a>
-    <a href="signup page">sign up</a>
-  </div>
-  <footer id="pageFooter">Make freinds today</footer>
+  <header id="pageHeader">Header</header>
+  <article id="mainArticle">Article</article>
+  <nav id="mainNav">Nav</nav>
+  <div id="siteAds">Ads</div>
+  <footer id="pageFooter">Footer</footer>
 </body>
