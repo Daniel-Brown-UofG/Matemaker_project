@@ -8,9 +8,10 @@ body {background-color: #659DBD;}
 </style>
 
 <h1>Create Genre</h1>
-<form id="login_form" method="post" action="{% url 'matemaker:login' %}">
-<div class = "name">
-Username: <input type="text" name="genrename" value="" size="50" />
-</div>
-<input type="submit" value="Create Genre"/>
+<form id="login_form" method="post" action="{% url 'matemaker:add_genre' %}">
+    {% csrf_token %}
+    <div class = "name">
+    Genre Name: <input type="text" name="genrename" value="" size="50" />
+    </div>
+    <input type="submit" value="Create Genre"/>
 </form>

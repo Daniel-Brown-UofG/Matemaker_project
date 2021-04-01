@@ -11,20 +11,21 @@ body {background-color: #659DBD;}
 </style>
 
 <h1>Sign up for Matemaker</h1>
-<form id="login_form" method="post" action="{% url 'matemaker:login' %}">
-<div class= "image">
-  Image:
-  <br>
-  <input type="image" name="profilepicture" value ="">
-<input type="submit" value="Add profile picture" />
-<div class = "username">
-Username: <input type="text" name="username" value="" size="50" />
-</div>
-<div class = "password">
-Password: <input type="password" name="password" value="" size="50" />
-</div>
-<div class = "cpassword">
-Password: <input type="password" name="confirm password" value="" size="50" />
-</div>
-<input type="submit" value="SignUp" />
+<form id="login_form" method="post" action="{% url 'matemaker:register' %}">
+  {% csrf_token %}
+  <div class= "image">
+    Image:
+    <br>
+    <input type="image" name="profilepicture" value ="">
+  <input type="submit" value="Add profile picture" />
+  <div class = "username">
+  Username: <input type="text" name="username" value="" size="50" />
+  </div>
+  <div class = "password">
+  Password: <input type="password" name="password" value="" size="50" />
+  </div>
+  <div class = "cpassword">
+  Password: <input type="password" name="confirm password" value="" size="50" />
+  </div>
+  <input type="submit" value="SignUp" />
 </form>

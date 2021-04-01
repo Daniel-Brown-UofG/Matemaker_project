@@ -10,12 +10,13 @@ body {background-color: #659DBD;}
 
 <h1>Login to Matemaker</h1>
 <form id="login_form" method="post" action="{% url 'matemaker:login' %}">
-<div class = "username">
-Username: <input type="text" name="username" value="" size="50" />
-</div>
-<div class = "password">
-Password: <input type="password" name="password" value="" size="50" />
-</div>
+    {% csrf_token %}
+    <div class = "username">
+    Username: <input type="text" name="username" value="" size="50" />
+    </div>
+    <div class = "password">
+    Password: <input type="password" name="password" value="" size="50" />
+    </div>
 
-<input type="submit" value="Submit" />
+    <input type="submit" value="Submit" />
 </form>
