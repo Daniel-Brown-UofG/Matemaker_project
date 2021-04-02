@@ -8,7 +8,10 @@ class Genre(models.Model):
 	views = models.IntegerField(default=0)
 	members = models.IntegerField(default=0)
 	date = models.DateTimeField('date created',null=True)
-
+	
+	def save(self, *args, **kwargs):
+	    super(Genre, self).save(*args,**kwargs)
+	
 	class Meta:
 		verbose_name_plural = "Genres"
 

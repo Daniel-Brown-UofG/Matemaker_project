@@ -1,0 +1,12 @@
+<ul>    
+    {% if genres %}
+        {% for g in genres %}
+            <li>
+            <h1>  {{ g.name }} </h1>
+            </li>
+        {% endfor %}
+        
+    {% else %}
+        <h1> No genres found </h1>
+    {% endif %}
+</ul>
