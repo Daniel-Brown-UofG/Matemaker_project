@@ -1,7 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from matemaker.models import UserProfile
+from matemaker.models import UserProfile, Genre, Interest
 from matemaker.forms import UserForm, UserProfileForm, GenreForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -119,3 +119,19 @@ def add_genre(request):
 def genres(request):
     context_dict = {}
     return render (request, 'matemaker/genres.html', context=context_dict)
+
+
+# view for individual genre pages (sorry for all the reused variable names..)
+def genre(request, genre_name):     # should probably be a slug
+    context_dict = {}
+
+    try: 
+        genre = Genre.objects.get(name=genre_name)
+        interests = Interest.object.filter(genre=genre)
+
+        context_dict['genre'] = genre
+        context_dict['interests'] = interests
+    except Genre.doesNotExist:
+        context_dict['genre'] = None
+        context_dict['interests'] = None
+    return render(request, 'matemaker/genre.html', context = context_dict)
