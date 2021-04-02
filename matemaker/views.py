@@ -92,10 +92,10 @@ def user_login(request):
         return render(request, 'matemaker/login.html')
 
 @login_required
-def user_logout(request):
+def signout(request):
     logout(request)
     # take the user to homepage
-    return redirect(reverse('rango:index'))
+    return redirect(reverse('matemaker:home'))
 
 def restricted(request):
     return render(request, 'rango/restricted.html')

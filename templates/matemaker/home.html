@@ -58,8 +58,13 @@ header, footer, article, nav, div {
   <article id="mainArticle">Genres</article>
   <nav id="mainNav">Button</nav>
   <div id="siteAds">
+  {% if user.is_authenticated %}
+    <a href="{% url 'matemaker:signout' %}"> sign out </a>
+    Hello {{ user.username }}
+  {% else %}
     <a href="{% url 'matemaker:login' %}">log in</a>
     <a href="{% url 'matemaker:register' %}">sign up</a>
+  {% endif %}
   </div>
   <footer id="pageFooter">Make freinds today</footer>
 
