@@ -8,10 +8,18 @@ body {background-color: #659DBD;}
 </style>
 
 <h1>Create Genre</h1>
-<form id="login_form" method="post" action="{% url 'matemaker:add_genre' %}">
+<form id="genre_form" method="post" action="{% url 'matemaker:add_genre' %}">
     {% csrf_token %}
-    <div class = "name">
-    Genre Name: <input type="text" name="genrename" value="" size="50" />
-    </div>
-    <input type="submit" value="Create Genre"/>
+    {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+    {% endfor %}
+    {% for field in form.visible_fields %}
+        {{ field.errors }}
+        {{ field.help_text }}
+        {{ field }}
+    {% endfor %}
+    {% comment %} <div class = "name">
+        Genre Name: <input type="text" name="genrename" value="" size="50" />
+    </div> {% endcomment %}
+    <input type="submit" name="submit" value="Create Genre"/>
 </form>

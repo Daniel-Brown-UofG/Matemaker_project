@@ -109,7 +109,7 @@ def add_genre(request):
         # if form is valid redirect to genres page, not home. 
         if form.is_valid():
                 form.save(commit=True)
-                return redirect('matemaker/genres/')
+                return redirect('/matemaker/genres/')
 
         else: 
             print(form.errors)
