@@ -1,12 +1,11 @@
-<ul>    
-    {% if genres %}
-        {% for g in genres %}
-            <li>
-             <a href="{% url 'matemaker:genre' g.name %}"> <h1>  {{ g.name }} </h1> </a>
-            </li>
-        {% endfor %}
-        
-    {% else %}
-        <h1> No genres found </h1>
-    {% endif %}
-</ul>
+
+{% if genres %}
+    {% for g in genres %}
+        <div>
+            <a href="{% url 'matemaker:genre' g.name %}"> {{ g.name }} </a>
+        </div>
+    {% endfor %}
+    
+{% else %}
+    <h1> No genres found </h1>
+{% endif %}

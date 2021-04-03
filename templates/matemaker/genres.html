@@ -21,7 +21,8 @@ body {background-color: #659DBD;}
 
 </style>
 <div id="grid">
-  <div>Sports</div>
+{% get_genre_list %}
+  {% comment %} <div>Sports</div>
   <div>Music</div>
   <div>Fashion</div>
   <div>Art</div>
@@ -29,12 +30,10 @@ body {background-color: #659DBD;}
   <div>Health</div>
   <div>Education</div>
   <div>News</div>
-  <div>Food</div>
+  <div>Food</div> {% endcomment %}
 </div>
 
 <div class= "a">
 <a href url="{% url 'matemaker:add_genre' %}">Add Genre</a>
 </div>
-<div>
-  {% get_genre_list %}
-</div>
+
