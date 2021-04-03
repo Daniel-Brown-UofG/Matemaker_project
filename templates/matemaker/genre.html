@@ -53,7 +53,8 @@ header, footer, article, nav, div {
 <body>
   <header id="pageHeader">Genre Name</header>
   <article id="mainArticle">Instrest</article>
-  <nav id="mainNav"><a href="{% url 'matemaker:create_genres' %}">Genres</a></nav>
-  <div id="siteAds"><a href="{% url 'matemaker:create_intrest' %}">Add Intrest</a></div>
+  <nav id="mainNav"><a href="{% url 'matemaker:genres' %}">Genres</a></nav>
+  {% comment %} <div id="siteAds"><a href="{% url 'matemaker:create_intrest' %}">Add Intrest</a></div> {% endcomment %}
+ 
   <footer id="pageFooter"><a href="{% url 'matemaker:home' %}">Home</a></footer>
 </body>

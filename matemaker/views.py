@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from matemaker.models import UserProfile, Genre, Interest
-from matemaker.forms import UserForm, UserProfileForm, GenreForm
+from matemaker.forms import UserForm, UserProfileForm, GenreForm, InterestForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
@@ -127,7 +127,7 @@ def genre(request, genre_name):     # should probably be a slug
 
     try: 
         genre = Genre.objects.get(name=genre_name)
-        interests = Interest.object.filter(genre=genre)
+        interests = Interest.objects.filter(genre=genre)
 
         context_dict['genre'] = genre
         context_dict['interests'] = interests
@@ -135,3 +135,40 @@ def genre(request, genre_name):     # should probably be a slug
         context_dict['genre'] = None
         context_dict['interests'] = None
     return render(request, 'matemaker/genre.html', context = context_dict)
+
+
+# view for individual interest pages 
+def interest(request, genre_name, interest_name):
+    context_dict = {}
+    genre = Genre.objects.get(name=genre_name)
+    interests = Interest.objects.get(genre=genre)   # get interests related to genre
+    interest = interests.objects.get(name=interest_name)    # search through genre interests for specified interest. 
+
+    context_dict['genre'] = genre
+    context_dict['interest'] = interest
+
+    return render(request, 'matemaker/interest.html', context = context_dict)
+
+def add_interest(request, genre_name):
+    try:
+        genre = Genre.objects.get(name = genre_name)
+    except Genre.DoesNotExist:
+        genre = None
+    if genre is None:
+        return redirect('/matemaker/genres/')
+    
+    form = InterestForm()
+
+    if request.method == 'POST':
+        form = InterestForm(request.POST)
+        if form.is_valid():
+            if genre:
+                interest = form.save(commit=False)
+                interest.genre = genre
+                interest.save
+                return redirect('/matemaker/genres/<slug:genre_name>')
+
+        else: 
+            print(form.errors)
+    context_dict = {'form': form, 'genre': genre}
+    return render(request, 'matemaker/createintrestpage.html', context_dict)
