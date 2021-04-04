@@ -5,6 +5,7 @@ from matemaker.models import UserProfile, Genre, Interest
 from matemaker.forms import UserForm, UserProfileForm, GenreForm, InterestForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import ObjectDoesNotExist
 
 def home(request):
     context_dict = {}
@@ -126,7 +127,7 @@ def genre(request, genre_name):     # should probably be a slug
     context_dict = {}
 
     try: 
-        genre = Genre.objects.get(name=genre_name)
+        genre = Genre.objects.get(slug=genre_name)
         interests = Interest.objects.filter(genre=genre)
 
         context_dict['genre'] = genre
@@ -140,9 +141,9 @@ def genre(request, genre_name):     # should probably be a slug
 # view for individual interest pages 
 def interest(request, genre_name, interest_name):
     context_dict = {}
-    genre = Genre.objects.get(name=genre_name)
+    genre = Genre.objects.get(slug=genre_name)
     interests = Interest.objects.filter(genre=genre)   # get interests related to genre
-    interest = interests.get(name=interest_name)    # search through genre interests for specified interest. 
+    interest = interests.get(slug=interest_name)    # search through genre interests for specified interest. 
 
     context_dict['genre'] = genre
     context_dict['interest'] = interest

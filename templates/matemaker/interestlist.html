@@ -1,10 +1,10 @@
 {% if interests %}
     {% for i in interests %}
         <div>
-            <a href="{% url 'matemaker:interest' i.genre.name i.name %}"> {{ i.name }} </a>
+            <a href="{% url 'matemaker:interest' i.genre.slug i.slug %}"> {{ i.name }} </a>
         </div>
     {% endfor %}
-    
+        
 {% else %}
     <h1> No interests found </h1>
 {% endif %}

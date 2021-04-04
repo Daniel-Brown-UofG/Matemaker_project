@@ -2,7 +2,7 @@
 {% if genres %}
     {% for g in genres %}
         <div>
-            <a href="{% url 'matemaker:genre' g.name %}"> {{ g.name }} </a>
+            <a href="{% url 'matemaker:genre' g.slug %}"> {{ g.name }} </a>
         </div>
     {% endfor %}
     

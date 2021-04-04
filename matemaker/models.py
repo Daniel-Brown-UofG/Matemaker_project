@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 
 
 class Genre(models.Model):
@@ -8,9 +9,11 @@ class Genre(models.Model):
 	views = models.IntegerField(default=0)
 	members = models.IntegerField(default=0)
 	date = models.DateTimeField('date created',null=True)
-	
+	slug = models.SlugField(unique = True)
+
 	def save(self, *args, **kwargs):
-	    super(Genre, self).save(*args,**kwargs)
+		self.slug = slugify(self.name)
+		super(Genre, self).save(*args,**kwargs)
 	
 	class Meta:
 		verbose_name_plural = "Genres"
@@ -27,8 +30,14 @@ class Interest(models.Model):
 	views = models.IntegerField(default=0)
 	members = models.IntegerField(default=0)
 	date = models.DateTimeField('date created',null=True)
+	slug = models.SlugField(unique = True)
 
+	def save(self, *args, **kwargs):
+		self.slug = slugify(self.name)
+		super(Interest, self).save(*args,**kwargs)
+		
 	def __str__(self): 
+		self.slug = slugify(self.name)
 		return self.name
 
 
