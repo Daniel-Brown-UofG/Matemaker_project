@@ -60,7 +60,7 @@ header, footer, article, nav, div {
 
   <div id="siteAds">
   {% if user.is_authenticated %}
-      <input class="btn btn-success" type="button" value="Genres" onclick="location.href='{{% url 'matemaker:signout' %}' "/>
+      <input class="btn btn-success" type="button" value="Signout" onclick="location.href='{% url 'matemaker:signout' %}' "/>
     Hello {{ user.username }}
   {% else %}
       <input class="btn btn-success" type="button" value="Login" onclick="location.href='{% url 'matemaker:login' %}' "/>

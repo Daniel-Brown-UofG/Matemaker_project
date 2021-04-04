@@ -150,9 +150,10 @@ def interest(request, genre_name, interest_name):
 
     return render(request, 'matemaker/intrest.html', context = context_dict)
 
+@login_required
 def add_interest(request, genre_name):
     try:
-        genre = Genre.objects.get(name = genre_name)
+        genre = Genre.objects.get(slug=genre_name)
     except Genre.DoesNotExist:
         genre = None
     if genre is None:

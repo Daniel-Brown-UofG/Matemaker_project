@@ -13,5 +13,6 @@ urlpatterns = [
     path('genres/add_genre/', views.add_genre, name='add_genre'),
     path('genres/<slug:genre_name>/', views.genre, name='genre'),
     path('genres/<slug:genre_name>/<slug:interest_name>/', views.interest, name='interest'), 
+    path('genres/<slug:genre_name>/add_interest/', views.add_interest, name='add_interest'),
 
 ]

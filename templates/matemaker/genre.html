@@ -55,6 +55,9 @@ header, footer, article, nav, div {
   <header id="pageHeader">Genre Name</header>
   <article id="mainArticle">Instrests
   {% get_interest_list genre %}
+  <div>
+    <input class="btn btn-success" type="button" value="add interest" onclick="location.href='{% url 'matemaker:add_interest' genre.slug %}' "/>
+  </div>
   </article>
   <nav id="mainNav"><a href="{% url 'matemaker:genres' %}">Genres</a>
   {% get_genre_list %}
