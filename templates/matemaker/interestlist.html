@@ -1,0 +1,10 @@
+{% if interests %}
+    {% for i in interests %}
+        <div>
+             {{ i.name }} 
+        </div>
+    {% endfor %}
+    
+{% else %}
+    <h1> No interests found </h1>
+{% endif %}

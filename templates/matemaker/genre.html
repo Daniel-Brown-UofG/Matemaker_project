@@ -1,4 +1,5 @@
 <!doctype html>
+{% load matemaker_template_tags %}
 <title>Genre</title>
 <style>
 body {
@@ -52,9 +53,12 @@ header, footer, article, nav, div {
 </style>
 <body>
   <header id="pageHeader">Genre Name</header>
-  <article id="mainArticle">Instrest</article>
-  <nav id="mainNav"><a href="{% url 'matemaker:genres' %}">Genres</a></nav>
+  <article id="mainArticle">Instrests
+  {% get_interest_list genre %}
+  </article>
+  <nav id="mainNav"><a href="{% url 'matemaker:genres' %}">Genres</a>
+  {% get_genre_list %}
   {% comment %} <div id="siteAds"><a href="{% url 'matemaker:create_intrest' %}">Add Intrest</a></div> {% endcomment %}
- 
+  </nav>
   <footer id="pageFooter"><a href="{% url 'matemaker:home' %}">Home</a></footer>
 </body>
