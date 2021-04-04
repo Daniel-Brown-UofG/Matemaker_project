@@ -141,13 +141,13 @@ def genre(request, genre_name):     # should probably be a slug
 def interest(request, genre_name, interest_name):
     context_dict = {}
     genre = Genre.objects.get(name=genre_name)
-    interests = Interest.objects.get(genre=genre)   # get interests related to genre
-    interest = interests.objects.get(name=interest_name)    # search through genre interests for specified interest. 
+    interests = Interest.objects.filter(genre=genre)   # get interests related to genre
+    interest = interests.get(name=interest_name)    # search through genre interests for specified interest. 
 
     context_dict['genre'] = genre
     context_dict['interest'] = interest
 
-    return render(request, 'matemaker/interest.html', context = context_dict)
+    return render(request, 'matemaker/intrest.html', context = context_dict)
 
 def add_interest(request, genre_name):
     try:
