@@ -1,2 +1,0 @@
-This is only here so that the directory for images is included in the git repo. 
-Once images are used in here, this should be removed.

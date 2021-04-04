@@ -1,4 +1,5 @@
 <!doctype html>
+{% load staticfiles %}
 <title>Homepage</title>
 <!DOCTYPE html>
 <html>
@@ -56,32 +57,27 @@ header, footer, article, nav, div {
 <body>
   <header id="pageHeader">Matemaker Project</header>
   <article id="mainArticle">Genres</article>
-  <nav id="mainNav">Button</nav>
+
   <div id="siteAds">
   {% if user.is_authenticated %}
-    <a href="{% url 'matemaker:signout' %}"> sign out </a>
+      <input class="btn btn-success" type="button" value="Genres" onclick="location.href='{{% url 'matemaker:signout' %}' "/>
     Hello {{ user.username }}
   {% else %}
-    <a href="{% url 'matemaker:login' %}">log in</a>
-    <a href="{% url 'matemaker:register' %}">sign up</a>
+      <input class="btn btn-success" type="button" value="Login" onclick="location.href='{% url 'matemaker:login' %}' "/>
+      <input class="btn btn-success" type="button" value="Signup" onclick="location.href='{% url 'matemaker:register' %}' "/>
   {% endif %}
   </div>
-  <footer id="pageFooter">Make freinds today</footer>
+  
 
-<h1>Matemaker</h1>
-<p>Find freinds today</p>
+<img src="{% static 'images/logo_size.jpg' %}" 
+      alt="Matemaker" />
 
-<a href= "{% url 'matemaker:login' %}">login</a>
-
-<div class = "a1">
-<a href="{% url 'matemaker:register' %}">register</a>
-</div>
 
 <div class = "a2">
-<a href="{% url 'matemaker:genres' %}">Genres</a>
+  <input class="btn btn-success" type="button" value="All Genres" onclick="location.href='{% url 'matemaker:genres' %}' "/>
 </div>
 
-<table style="width:500px">
+<table style="width:250px">
   <tr>
     <th>Trending topic</th>
     <th>Genre</th>
