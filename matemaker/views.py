@@ -14,7 +14,7 @@ def visitor_cookie_handler(request, response, interest):
     last_visit_cookie = request.COOKIES.get('last_visit', str(datetime.now()))
     last_visit_time = datetime.strptime(last_visit_cookie[:-7],'%Y-%m-%d %H:%M:%S')
     # If it's been more than an hour since the last visit...
-    if (datetime.now() - last_visit_time).days > 0:
+    if (datetime.now() - last_visit_time).seconds > 0:
         interest.views = int(interest.views)+1
         genre = interest.genre
         genre.views = int(genre.views)+1
@@ -24,6 +24,7 @@ def visitor_cookie_handler(request, response, interest):
     else:
         response.set_cookie('last_visit', last_visit_cookie)
         # Update/set the visits cookie
+    return
 
 def home(request):
     context_dict = {}
@@ -195,7 +196,7 @@ def interest(request, genre_name, interest_name):
     context_dict['genre_slug'] = genre.slug
     context_dict['interest_slug'] = interest.slug
     response = render(request, 'matemaker/intrest.html', context = context_dict)
-    visitor_cookie_handler(request,response,Interest)
+    visitor_cookie_handler(request,response,interest)
 
     return response
 
@@ -219,14 +220,13 @@ def add_interest(request, genre_name):
                 interest.creator = request.user
                 interest.date = timezone.now()
                 interest.members = int(interest.members)+1
+                interest.views = int(interest.views)+1
                 interest.save()
-                return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest.slug}))
+                return redirect(reverse('matemaker:genre',  kwargs={'genre_name' : genre_name}))
 
         else: 
             print(form.errors)
-    interest_form = InterestForm()
-    context_dict = {'form': form, 'interest_form': interest_form,'genre': genre}
-    
+    context_dict = {'form': form, 'genre': genre}
     return render(request, 'matemaker/createintrestpage.html', context_dict)
 
 
