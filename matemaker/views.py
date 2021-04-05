@@ -58,6 +58,12 @@ def leave(request, genre_name, interest_name):
     genre.save()
     return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
 
+@login_required
+def like(request, genre_name, interest_name):
+    post = get_object_or_404(Post,id = request.Post.get('post_id'))
+    post.likes.add(request.user)
+    return redirect(reverse('matemaker:interest', kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
+
 def register(request):
     # boolean to tell template if register was successful. set to false initially
     registered = False
