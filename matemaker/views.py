@@ -43,7 +43,6 @@ def register(request):
 
             # update registered as registration was successful
             registered = True
-        
         else:
             # invalid form? 
             print(user_form.errors, profile_form.errors)

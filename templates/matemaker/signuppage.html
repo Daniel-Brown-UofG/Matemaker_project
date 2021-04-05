@@ -8,24 +8,31 @@ body {background-color: #659DBD;}
 .password {font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
 .cpassword{font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
 .image{font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
+p {font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
 </style>
+{% if registered %}
+  <h1> Thank you for registering. <a href="{% url 'matemaker:home' %}"> Return to the homepage to login.</a> </h1>
+{% else %}
+  <h1>Sign up for Matemaker</h1>
+  <form id="login_form" method="post" action="{% url 'matemaker:register' %}" enctype="multipart.form-data">
+    {% csrf_token %}
+    {% comment %} <div class= "image">
+      Image:
+      <br>
+      <input type="image" name="profilepicture" value ="">
+    <input type="submit" value="Add profile picture" />
+    <div class = "username">
+    Username: <input type="text" name="username" value="" size="50" />
+    </div>
+    <div class = "password">
+    Password: <input type="password" name="password" value="" size="50" />
+    </div>
+    <div class = "cpassword">
+    Password: <input type="password" name="confirm password" value="" size="50" />
+    </div> {% endcomment %}
+    {{ user_form.as_p}}
+    {{ profile_form.as_p }}
 
-<h1>Sign up for Matemaker</h1>
-<form id="login_form" method="post" action="{% url 'matemaker:register' %}">
-  {% csrf_token %}
-  <div class= "image">
-    Image:
-    <br>
-    <input type="image" name="profilepicture" value ="">
-  <input type="submit" value="Add profile picture" />
-  <div class = "username">
-  Username: <input type="text" name="username" value="" size="50" />
-  </div>
-  <div class = "password">
-  Password: <input type="password" name="password" value="" size="50" />
-  </div>
-  <div class = "cpassword">
-  Password: <input type="password" name="confirm password" value="" size="50" />
-  </div>
-  <input type="submit" value="SignUp" />
-</form>
+    <input type="submit" name="submit" value="SignUp" />
+  </form>
+{% endif %}

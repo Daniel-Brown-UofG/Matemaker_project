@@ -44,11 +44,11 @@ class Interest(models.Model):
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    intersts = models.ManyToManyField(Interest)
+    intersts = models.ManyToManyField(Interest, blank=True)
     
     # The additional attributes we wish to include.
     website = models.URLField(blank=True)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True, default= 'defaults/default_pp.jpg')
 
 
     def __str__(self):
