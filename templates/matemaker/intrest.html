@@ -1,5 +1,6 @@
 <!doctype html>
 {% load matemaker_template_tags %}
+
 {% load staticfiles %}
 
 <head>
@@ -55,6 +56,7 @@
   }
   </style>
 </head>
+
 <body>
   <header id="pageHeader">{{interest}}</header>
   <article id="mainArticle">Posts</article>
@@ -68,3 +70,14 @@
   </div>
   <footer id="pageFooter">Post Something</footer>
 </body>
+
+  <div id="siteAds">
+    <form action="{% url 'matemaker:join' genre_slug interest_slug %}" method=POST>
+        {% csrf_token %}
+        <button type="submit">Join</button>
+    </form>
+    <form action="{% url 'matemaker:leave' genre_slug interest_slug %}" method=POST>
+        {% csrf_token %}
+        <button type="submit">Leave</button>
+    </form>
+  </div>

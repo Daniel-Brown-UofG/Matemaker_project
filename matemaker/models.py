@@ -44,6 +44,16 @@ class Interest(models.Model):
 		self.slug = slugify(self.name)
 		return self.name
 
+class Post(models.Model):
+
+	interest = models.ForeignKey(Interest, on_delete=models.CASCADE)
+	poster = models.OneToOneField(User, on_delete=models.CASCADE)
+	message = models.CharField(max_length=128, unique=False, default='Hello world!')
+	date = models.DateTimeField('date created',null=True)
+	likes = models.IntegerField(default=0)
+	def __str__(self):
+		return self.poster.username
+
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.

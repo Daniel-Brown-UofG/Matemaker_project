@@ -1,5 +1,5 @@
 from django import forms
-from matemaker.models import UserProfile, Genre,Interest
+from matemaker.models import UserProfile, Genre,Interest, Post
 from django.contrib.auth.models import User
 
 
@@ -24,7 +24,15 @@ class InterestForm(forms.ModelForm):
 
 	class Meta:
 		model = Interest
-		exclude = ('genre','date','creator')
+		exclude = ('genre','date','creator','slug')
+
+class PostForm(forms.ModelForm):
+    message = forms.CharField(max_length=128,
+                            help_text="Message @everyone")
+
+    class Meta:
+        model = Post
+        fields = ('message',)
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
