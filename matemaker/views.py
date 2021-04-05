@@ -7,6 +7,20 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
+from datetime import datetime
+
+def visitor_cookie_handler(request, response, interest):
+    last_visit_cookie = request.COOKIES.get('last_visit', str(datetime.now()))
+    last_visit_time = datetime.strptime(last_visit_cookie[:-7],'%Y-%m-%d %H:%M:%S')
+    # If it's been more than an hour since the last visit...
+    if (datetime.now() - last_visit_time).hours > 0:
+        interest.view += 1
+        interest.genre.view += 1
+        response.set_cookie('last_visit', str(datetime.now()))
+    else:
+        response.set_cookie('last_visit', last_visit_cookie)
+        # Update/set the visits cookie
+        response.set_cookie('visits', visits)
 
 def home(request):
     context_dict = {}
@@ -172,7 +186,10 @@ def interest(request, genre_name, interest_name):
     context_dict['genre'] = genre
     context_dict['interest'] = interest
 
-    return render(request, 'matemaker/intrest.html', context = context_dict)
+    response = render(request, 'matemaker/intrest.html', context = context_dict)
+    visitor_cookie_handler(request,response,Interest)
+
+    return response
 
 @login_required
 def add_interest(request, genre_name):
