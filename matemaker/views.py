@@ -15,13 +15,15 @@ def visitor_cookie_handler(request, response, interest):
     last_visit_time = datetime.strptime(last_visit_cookie[:-7],'%Y-%m-%d %H:%M:%S')
     # If it's been more than an hour since the last visit...
     if (datetime.now() - last_visit_time).days > 0:
-        interest.view += 1
-        interest.genre.view += 1
+        interest.views = int(interest.views)+1
+        genre = interest.genre
+        genre.views = int(genre.views)+1
+        interest.save()
+        genre.save()
         response.set_cookie('last_visit', str(datetime.now()))
     else:
         response.set_cookie('last_visit', last_visit_cookie)
         # Update/set the visits cookie
-        response.set_cookie('visits', visits)
 
 def home(request):
     context_dict = {}
@@ -37,8 +39,10 @@ def join(request, genre_name, interest_name):
     profile = UserProfile.objects.get(user=request.user)
     profile.intersts.add(interest)
     genre = interest.genre
-    genre.members += 1     
-    interest.members += 1
+    genre.members = int(genre.members)+1   
+    interest.members = int(interest.members)+1
+    interest.save()
+    genre.save()
     return redirect(reverse('matemaker:interest', kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
 
 @login_required
@@ -47,8 +51,10 @@ def leave(request, genre_name, interest_name):
     profile = UserProfile.objects.get(user=request.user)
     profile.intersts.remove(interest)
     genre = interest.genre
-    genre.members -= 1
-    interest.members -= 1
+    genre.members = int(genre.members)-1   
+    interest.members = int(interest.members)-1
+    interest.save()
+    genre.save()
     return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
 
 def register(request):
@@ -147,7 +153,8 @@ def add_genre(request):
                 genre = form.save(commit=True)
                 genre.creator = request.user
                 genre.date = timezone.now()
-                genre.save
+                genre.members = int(genre.members) +1
+                genre.save()
                 return redirect('/matemaker/genres/')
 
         else: 
@@ -182,15 +189,13 @@ def interest(request, genre_name, interest_name):
     genre = Genre.objects.get(slug=genre_name)
     interests = Interest.objects.filter(genre=genre)   # get interests related to genre
     interest = interests.get(slug=interest_name)    # search through genre interests for specified interest. 
-    
-    # search through genre interests for specified interest. 
 
     context_dict['genre'] = genre
     context_dict['interest'] = interest
     context_dict['genre_slug'] = genre.slug
     context_dict['interest_slug'] = interest.slug
     response = render(request, 'matemaker/intrest.html', context = context_dict)
-    # visitor_cookie_handler(request,response,Interest)
+    visitor_cookie_handler(request,response,Interest)
 
     return response
 
@@ -213,7 +218,8 @@ def add_interest(request, genre_name):
                 interest.genre = genre
                 interest.creator = request.user
                 interest.date = timezone.now()
-                interest.save
+                interest.members = int(interest.members)+1
+                interest.save()
                 return redirect('/matemaker/genres/<slug:genre_name>')
 
         else: 

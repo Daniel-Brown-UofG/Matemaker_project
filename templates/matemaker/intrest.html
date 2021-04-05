@@ -69,8 +69,14 @@
     {% get_member_list interest %}
   </nav>
   <div id="siteAds">
-    <a href="{% url 'matemaker:join' genre_slug interest_slug %}">Join</a>
-    <a href url="{% url 'matemaker:leave' genre_slug interest_slug %}">Leave</a>
+    <form action="{% url 'matemaker:join' genre_slug interest_slug %}" method=POST>
+        {% csrf_token %}
+        <button type="submit">Join</button>
+    </form>
+    <form action="{% url 'matemaker:leave' genre_slug interest_slug %}" method=POST>
+        {% csrf_token %}
+        <button type="submit">Leave</button>
+    </form>
   </div>
   <footer id="pageFooter">Post Something</footer>
 {% endblock %}
