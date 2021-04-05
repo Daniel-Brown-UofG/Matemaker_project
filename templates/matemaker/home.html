@@ -1,9 +1,7 @@
-<!DOCTYPE html>
-{% extends 'matemaker/base_pages.html' %}
+<!doctype html>
 {% load staticfiles %}
-{% block title_block %}
-	Home Page
-{% endblock %}
+<title>Homepage</title>
+<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -56,19 +54,9 @@ header, footer, article, nav, div {
  }
 }
 </style>
-</head>
-{% block body_block %}
-  <div id= "pageHeader">
-  {% block header_block %}
-    Matemaker Project
-  {% endblock %}
-</div>
-
-<div id="mainArticle">
-  {% block article_block %}
-  Genres
-  {% endblock %}
-</div>
+<body>
+  <header id="pageHeader">Matemaker Project</header>
+  <article id="mainArticle">Genres</article>
 
   <div id="siteAds">
   {% if user.is_authenticated %}
@@ -107,4 +95,4 @@ header, footer, article, nav, div {
   </tr>
 </table>
 
-{% endblock %}
+</body>

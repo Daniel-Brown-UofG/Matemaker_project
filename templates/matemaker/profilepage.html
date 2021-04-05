@@ -1,5 +1,4 @@
 <!doctype html>
-{% extends 'matemaker/base_pages.html' %}
 <title>Profilepage</title>
 <style>
 body {
@@ -52,33 +51,13 @@ header, footer, article, nav, div {
  }
 }
 </style>
-{% block body_block %}
-
-  <div id = "pageHeader">
-    {% block header_block %}
-    Your Profile
-    {% endblock %}
-  </div>
-
-  <div id = "mainArticle">
-    {% block article_block %}
-    Image
-    {% endblock %}
-  </div>
-
-  <div id= "mainNav">
-  {% block nav_block %}
-  Your intrests
-  {% endblock %}
-</div>
-
+<body>
+  <header id="pageHeader">Your Profile</header>
+  <article id="mainArticle">Image</article>
+  <nav id="mainNav">Your intrests</nav>
   <div id="siteAds">Details</div>
-
-  <div id = "pageFooter">
-    {% block footer_block}
+  <footer id="pageFooter">
     <a href="edit intrests">Edit Intrests</a>
     <a href="delete account">Delete Account</a>
-    {% endblock %}
-  </div>
-
-{% endblock %}
+  </footer>
+</body>
