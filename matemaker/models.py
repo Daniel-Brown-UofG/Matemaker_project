@@ -10,6 +10,7 @@ class Genre(models.Model):
 	members = models.IntegerField(default=0)
 	date = models.DateTimeField('date created',null=True)
 	slug = models.SlugField(unique = True)
+	creator = models.ForeignKey(User, on_delete=models.DO_NOTHING,null=True)
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)
@@ -31,6 +32,7 @@ class Interest(models.Model):
 	members = models.IntegerField(default=0)
 	date = models.DateTimeField('date created',null=True)
 	slug = models.SlugField(unique = True)
+	creator = models.ForeignKey(User, on_delete=models.DO_NOTHING,null=True)
 
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.name)

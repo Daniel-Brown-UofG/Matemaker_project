@@ -6,6 +6,7 @@ from matemaker.forms import UserForm, UserProfileForm, GenreForm, InterestForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.utils import timezone
 
 def home(request):
     context_dict = {}
@@ -14,6 +15,26 @@ def home(request):
 def contact_us(request):
     context_dict = {}
     return render (request, 'matemaker/contact_us.html', context=context_dict)
+
+@login_required
+def join(request,interest_name):
+    interest = Interest.object.filter(name=interest_name)
+    profile = UserProfile.object.filter(User=request.user)
+    profile.interests.add(interest)
+    genre = interest.genre
+    genre.member += 1
+    interest.member += 1
+    return redirect()
+
+@login_required
+def leave(request,interest_name):
+    interest = Interest.object.filter(name=interest_name)
+    profile = UserProfile.object.filter(User=request.user)
+    profile.interests.remove(interest)
+    genre = interest.genre
+    genre.member -= 1
+    interest.member -= 1
+    return redirect()
 
 def register(request):
     # boolean to tell template if register was successful. set to false initially
@@ -109,7 +130,10 @@ def add_genre(request):
         form = GenreForm(request.POST)
         # if form is valid redirect to genres page, not home. 
         if form.is_valid():
-                form.save(commit=True)
+                genre = form.save(commit=True)
+                genre.creator = request.user
+                genre.date = timezone.now()
+                genre.save
                 return redirect('/matemaker/genres/')
 
         else: 
@@ -142,8 +166,8 @@ def genre(request, genre_name):     # should probably be a slug
 def interest(request, genre_name, interest_name):
     context_dict = {}
     genre = Genre.objects.get(slug=genre_name)
-    interests = Interest.objects.filter(genre=genre)   # get interests related to genre
-    interest = interests.get(slug=interest_name)    # search through genre interests for specified interest. 
+    interest = Interest.objects.filter(genre=genre)   # get interests related to genre
+    # search through genre interests for specified interest. 
 
     context_dict['genre'] = genre
     context_dict['interest'] = interest
@@ -167,6 +191,8 @@ def add_interest(request, genre_name):
             if genre:
                 interest = form.save(commit=False)
                 interest.genre = genre
+                interest.creator = request.user
+                interest.date = timezone.now()
                 interest.save
                 return redirect('/matemaker/genres/<slug:genre_name>')
 
