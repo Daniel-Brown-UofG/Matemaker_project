@@ -3,7 +3,7 @@
     {% for m in members %}
         <div>
             <img src="{{ m.picture.url }}" width="50" height="50">
-            {{ m }}
+            <a href="{% url 'matemaker:profile' m %}">{{ m }} </a>
         </div>
     {% endfor %}
 {% else %}

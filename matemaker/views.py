@@ -8,12 +8,13 @@ from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 from datetime import datetime
+from django.contrib.auth.models import User
 
 def visitor_cookie_handler(request, response, interest):
     last_visit_cookie = request.COOKIES.get('last_visit', str(datetime.now()))
     last_visit_time = datetime.strptime(last_visit_cookie[:-7],'%Y-%m-%d %H:%M:%S')
     # If it's been more than an hour since the last visit...
-    if (datetime.now() - last_visit_time).hours > 0:
+    if (datetime.now() - last_visit_time).days > 0:
         interest.view += 1
         interest.genre.view += 1
         response.set_cookie('last_visit', str(datetime.now()))
@@ -179,14 +180,16 @@ def genre(request, genre_name):     # should probably be a slug
 def interest(request, genre_name, interest_name):
     context_dict = {}
     genre = Genre.objects.get(slug=genre_name)
-    interest = Interest.objects.filter(genre=genre)   # get interests related to genre
+    interests = Interest.objects.filter(genre=genre)   # get interests related to genre
+    interest = interests.get(slug=interest_name)    # search through genre interests for specified interest. 
+    
     # search through genre interests for specified interest. 
 
     context_dict['genre'] = genre
     context_dict['interest'] = interest
 
     response = render(request, 'matemaker/intrest.html', context = context_dict)
-    visitor_cookie_handler(request,response,Interest)
+    # visitor_cookie_handler(request,response,Interest)
 
     return response
 
@@ -216,3 +219,15 @@ def add_interest(request, genre_name):
             print(form.errors)
     context_dict = {'form': form, 'genre': genre}
     return render(request, 'matemaker/createintrestpage.html', context_dict)
+
+
+def profile_page(request, user_profile):
+    context_dict={}
+
+    try:
+        user = User.objects.get(username=user_profile)
+        user_prof=UserProfile.objects.get(user=user)
+        context_dict['user']=user_prof
+    except:
+        context_dict['user'] = None
+    return render(request, 'matemaker/profile.html', context = context_dict)

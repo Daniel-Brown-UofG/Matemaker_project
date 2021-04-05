@@ -8,7 +8,7 @@ def get_genre_list():
 
 @register.inclusion_tag('matemaker/interestlist.html')
 def get_interest_list(current_genre):
-    genre = Genre.objects.get(slug=current_genre)
+    genre = Genre.objects.get(name=current_genre)
 
     interests = Interest.objects.filter(genre=genre)
     return {'interests': interests}
