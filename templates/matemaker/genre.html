@@ -1,6 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+{% extends 'matemaker/base_pages.html' %}
 {% load matemaker_template_tags %}
-<title>Genre</title>
+
+{% block title_block %}
+	Genre
+{% endblock %}
+
 <style>
 body {
   background-color: #659DBD;
@@ -37,7 +42,7 @@ header, footer, article, nav, div {
 #siteAds {
   grid-area: ads;
   }
-/* Stack the layout on small devices/viewports. */
+
 @media all and (max-width: 575px) {
   body {
     grid-template-areas:
@@ -51,17 +56,34 @@ header, footer, article, nav, div {
  }
 }
 </style>
-<body>
-  <header id="pageHeader">Genre Name</header>
-  <article id="mainArticle">Instrests
+
+{% block body_block %}
+
+<div id= "pageHeader">
+{% block header_block %}
+  Genre Name
+{% endblock %}
+</div>
+<div id="mainArticle">
+  {% block article_block %}
+  Instrests
   {% get_interest_list genre %}
+  {% endblock %}
   <div>
     <input class="btn btn-success" type="button" value="add interest" onclick="location.href='{% url 'matemaker:add_interest' genre.slug %}' "/>
   </div>
-  </article>
-  <nav id="mainNav"><a href="{% url 'matemaker:genres' %}">Genres</a>
-  {% get_genre_list %}
-  {% comment %} <div id="siteAds"><a href="{% url 'matemaker:create_intrest' %}">Add Intrest</a></div> {% endcomment %}
-  </nav>
-  <footer id="pageFooter"><a href="{% url 'matemaker:home' %}">Home</a></footer>
-</body>
+</div>
+
+  <div id="mainNav">
+    {% block nav_block %}
+    <a href="{% url 'matemaker:genres' %}">Genres</a>
+    {% get_genre_list %}
+    {% comment %} <div id="siteAds"><a href="{% url 'matemaker:create_intrest' %}">Add Intrest</a></div> {% endcomment %}
+    {% endblock %}
+  </div>
+
+  <div id="pageFooter">
+    {% block footer_block %}
+    <a href="{% url 'matemaker:home' %}">Home</a>
+    {% endblock %}
+{% endblock %}

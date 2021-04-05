@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		<style>
+			{% block style_block %}
+
+			{% endblock %}
+		</style>
+		<title>
+            {% block title_block %}
+
+            {% endblock %}
+    </title>
+  </head>
+  <body>
+		<div>
+        {% block body_block %}
+
+        {% endblock %}
+    </div>
+
+		<header>
+		{% block header_block %}
+
+
+		{% endblock %}
+	</header>
+
+		<article>
+			{% block article_block %}
+
+				{% endblock %}
+		</article>
+
+		<nav>
+			 {% block nav_block %}
+
+			 	{% endblock %}
+		</nav>
+
+		<footer>
+			{% block footer_block %}
+
+				{% endblock %}
+		</footer>
+</html>

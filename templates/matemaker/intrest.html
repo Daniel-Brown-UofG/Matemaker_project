@@ -40,7 +40,7 @@
   #siteAds {
     grid-area: ads;
     }
-  /* Stack the layout on small devices/viewports. */
+
   @media all and (max-width: 575px) {
     body {
       grid-template-areas:
@@ -55,10 +55,16 @@
   }
   </style>
 </head>
-<body>
-  <header id="pageHeader">{{interest}}</header>
+{% block body_block %}
+
+<div id= "pageHeader">
+  {% block header_block %}
+  {{interest}}
+  {% endblock %}
+</div>
+
   <article id="mainArticle">Posts</article>
-  <nav id="mainNav">  
+  <nav id="mainNav">
     Members
     {% get_member_list interest %}
   </nav>
@@ -67,4 +73,4 @@
     <a href url="{% url 'matemaker:leave' genre_slug interest_slug %}">Leave</a>
   </div>
   <footer id="pageFooter">Post Something</footer>
-</body>
+{% endblock %}

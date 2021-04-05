@@ -1,7 +1,9 @@
-<!doctype html>
-{% load staticfiles %}
-<title>Homepage</title>
 <!DOCTYPE html>
+{% extends 'matemaker/base_pages.html' %}
+{% load staticfiles %}
+{% block title_block %}
+	Home Page
+{% endblock %}
 <html>
 <head>
 <style>
@@ -40,7 +42,7 @@ header, footer, article, nav, div {
 #siteAds {
   grid-area: ads;
   }
-/* Stack the layout on small devices/viewports. */
+
 @media all and (max-width: 575px) {
   body {
     grid-template-areas:
@@ -54,9 +56,19 @@ header, footer, article, nav, div {
  }
 }
 </style>
-<body>
-  <header id="pageHeader">Matemaker Project</header>
-  <article id="mainArticle">Genres</article>
+</head>
+{% block body_block %}
+  <div id= "pageHeader">
+  {% block header_block %}
+    Matemaker Project
+  {% endblock %}
+</div>
+
+<div id="mainArticle">
+  {% block article_block %}
+  Genres
+  {% endblock %}
+</div>
 
   <div id="siteAds">
   {% if user.is_authenticated %}
@@ -67,9 +79,9 @@ header, footer, article, nav, div {
       <input class="btn btn-success" type="button" value="Signup" onclick="location.href='{% url 'matemaker:register' %}' "/>
   {% endif %}
   </div>
-  
 
-<img src="{% static 'images/logo_size.jpg' %}" 
+
+<img src="{% static 'images/logo_size.jpg' %}"
       alt="Matemaker" />
 
 
@@ -95,4 +107,4 @@ header, footer, article, nav, div {
   </tr>
 </table>
 
-</body>
+{% endblock %}

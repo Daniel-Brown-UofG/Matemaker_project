@@ -1,4 +1,5 @@
 <!doctype html>
+{% extends 'matemaker/base_pages.html' %}
 <title>Profilepage</title>
 <style>
 body {
@@ -33,11 +34,11 @@ header, footer, article, nav, div {
   }
 #mainNav {
   grid-area: nav;
-  } 
+  }
 #siteAds {
   grid-area: ads;
   }
-/* Stack the layout on small devices/viewports. */
+
 @media all and (max-width: 575px) {
   body {
     grid-template-areas:
@@ -51,13 +52,33 @@ header, footer, article, nav, div {
  }
 }
 </style>
-<body>
-  <header id="pageHeader">Your Profile</header>
-  <article id="mainArticle">Image</article>
-  <nav id="mainNav">Your intrests</nav>
+{% block body_block %}
+
+  <div id = "pageHeader">
+    {% block header_block %}
+    Your Profile
+    {% endblock %}
+  </div>
+
+  <div id = "mainArticle">
+    {% block article_block %}
+    Image
+    {% endblock %}
+  </div>
+
+  <div id= "mainNav">
+  {% block nav_block %}
+  Your intrests
+  {% endblock %}
+</div>
+
   <div id="siteAds">Details</div>
-  <footer id="pageFooter">
+
+  <div id = "pageFooter">
+    {% block footer_block}
     <a href="edit intrests">Edit Intrests</a>
     <a href="delete account">Delete Account</a>
-  </footer>
-</body>
+    {% endblock %}
+  </div>
+
+{% endblock %}
