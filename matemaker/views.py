@@ -220,11 +220,13 @@ def add_interest(request, genre_name):
                 interest.date = timezone.now()
                 interest.members = int(interest.members)+1
                 interest.save()
-                return redirect('/matemaker/genres/<slug:genre_name>')
+                return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest.slug}))
 
         else: 
             print(form.errors)
-    context_dict = {'form': form, 'genre': genre}
+    interest_form = InterestForm()
+    context_dict = {'form': form, 'interest_form': interest_form,'genre': genre}
+    
     return render(request, 'matemaker/createintrestpage.html', context_dict)
 
 

@@ -24,7 +24,7 @@ class InterestForm(forms.ModelForm):
 
 	class Meta:
 		model = Interest
-		exclude = ('genre','date','creator')
+		exclude = ('genre','date','creator','slug')
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())

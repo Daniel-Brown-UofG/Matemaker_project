@@ -7,29 +7,20 @@ body {background-color: #659DBD;}
 .name {font-family:verdana; color: #FBEEC1; padding-bottom: 30px;}
 </style>
 
-<h1>Create Intrest</h1>
-<form id="intrest_form" method="post" action="{% url 'matemaker:add_intrest' %}">
-  <div class = "name">
-    Intrest Name: <input type="text" name="genrename" value="" size="50" />
+<h1>Create Intrest for {{genre}} </h1>
+<form id="intrest_form" method="post" action="{% url 'matemaker:add_interest' genre %}">
+  {% csrf_token %}
+  {% comment %} <div class = "name">
+    Intrest Name: <input type="text" name="interestname" value="" size="50" />
   </div>
 
-    <div class="select" style="width:200px;">
-      <div class = "name">
-        Genre:
-      </div>
-
-      <select>
-        <option >Sports</option>
-        <option>Art</option>
-        <option >Music</option>
-     </select>
-
+    
      <div class = "name">
      </br>
        Description:
      </div>
 
-   <TEXTAREA Name="content" ROWS="10" COLS="75"></TEXTAREA>
-
+   <TEXTAREA Name="content" ROWS="10" COLS="75"></TEXTAREA> {% endcomment %}
+    {{ interest_form.as_p}}
     <input type="submit" name="submit" value="Create Intrest"/>
 </form>
