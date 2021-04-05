@@ -7,7 +7,9 @@ class Genre(models.Model):
 
 	name = models.CharField(max_length=64, unique=True)
 	views = models.IntegerField(default=0)
-	members = models.IntegerField(default=0)
+	members = models.IntegerField(default=0)	# should genres have members? Or shouldnt only interests have members?
+												# this isn't trivial as it causes logistical problems when a user has 
+												# more than one interest in a genre
 	date = models.DateTimeField('date created',null=True)
 	slug = models.SlugField(unique = True)
 	creator = models.ForeignKey(User, on_delete=models.DO_NOTHING,null=True)

@@ -63,8 +63,8 @@
     {% get_member_list interest %}
   </nav>
   <div id="siteAds">
-    <a href url="join">Join</a>
-    <a href url="leave">Leave</a>
+    <a href="{% url 'matemaker:join' genre_slug interest_slug %}">Join</a>
+    <a href url="{% url 'matemaker:leave' genre_slug interest_slug %}">Leave</a>
   </div>
   <footer id="pageFooter">Post Something</footer>
 </body>

@@ -32,24 +32,24 @@ def contact_us(request):
     return render (request, 'matemaker/contact_us.html', context=context_dict)
 
 @login_required
-def join(request,interest_name):
-    interest = Interest.object.filter(name=interest_name)
-    profile = UserProfile.object.filter(User=request.user)
-    profile.interests.add(interest)
+def join(request, genre_name, interest_name):
+    interest = Interest.objects.get(slug=interest_name)
+    profile = UserProfile.objects.get(user=request.user)
+    profile.intersts.add(interest)
     genre = interest.genre
-    genre.member += 1
-    interest.member += 1
-    return redirect()
+    genre.members += 1     
+    interest.members += 1
+    return redirect(reverse('matemaker:interest', kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
 
 @login_required
-def leave(request,interest_name):
-    interest = Interest.object.filter(name=interest_name)
-    profile = UserProfile.object.filter(User=request.user)
-    profile.interests.remove(interest)
+def leave(request, genre_name, interest_name):
+    interest = Interest.objects.get(slug=interest_name)
+    profile = UserProfile.objects.get(user=request.user)
+    profile.intersts.remove(interest)
     genre = interest.genre
-    genre.member -= 1
-    interest.member -= 1
-    return redirect()
+    genre.members -= 1
+    interest.members -= 1
+    return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
 
 def register(request):
     # boolean to tell template if register was successful. set to false initially
@@ -134,7 +134,7 @@ def signout(request):
     return redirect(reverse('matemaker:home'))
 
 def restricted(request):
-    return render(request, 'rango/restricted.html')
+    return render(request, 'matemaker/restricted.html')
 
 @login_required
 def add_genre(request):
@@ -187,7 +187,8 @@ def interest(request, genre_name, interest_name):
 
     context_dict['genre'] = genre
     context_dict['interest'] = interest
-
+    context_dict['genre_slug'] = genre.slug
+    context_dict['interest_slug'] = interest.slug
     response = render(request, 'matemaker/intrest.html', context = context_dict)
     # visitor_cookie_handler(request,response,Interest)
 

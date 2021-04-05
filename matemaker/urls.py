@@ -12,7 +12,9 @@ urlpatterns = [
     path('genres/', views.genres, name='genres'),
     path('genres/add_genre/', views.add_genre, name='add_genre'),
     path('genres/<slug:genre_name>/', views.genre, name='genre'),
-    path('genres/<slug:genre_name>/<slug:interest_name>/', views.interest, name='interest'), 
+    path('genres/<slug:genre_name>/<slug:interest_name>/', views.interest, name='interest'),
+    path('genres/<slug:genre_name>/<slug:interest_name>/join/', views.join, name='join'),
+    path('genres/<slug:genre_name>/<slug:interest_name>/leave/', views.leave, name='leave'),
     path('genres/<slug:genre_name>/add_interest/', views.add_interest, name='add_interest'),
     path('user/<slug:user_profile>/', views.profile_page, name="profile"),
 
