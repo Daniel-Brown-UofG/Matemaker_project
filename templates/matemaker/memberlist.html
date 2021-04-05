@@ -1,0 +1,11 @@
+{% load staticfiles %}
+{% if members %}
+    {% for m in members %}
+        <div>
+            <img src="{{ m.picture.url }}" width="50" height="50">
+            {{ m }}
+        </div>
+    {% endfor %}
+{% else %}
+    <h1> No members (yet!) </h1>
+{% endif %}
