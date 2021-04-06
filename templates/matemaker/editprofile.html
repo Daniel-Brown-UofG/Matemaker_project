@@ -60,14 +60,7 @@ header, footer, article, nav, div{
       <h1> Edit Profile Details: </h1> 
       <form id="login_form" method="post" action="{% url 'matemaker:edit_profile' profile %}" enctype="multipart.form-data">
         {% csrf_token %}
-        {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-        {% endfor %}
-        {% for field in form.visible_fields %}
-            {{ field.errors }}
-            {{ field.help_text }}
-            {{ field }}
-        {% endfor %}
+        {{form}}
         <input type="submit" name="submit" value="Confirm Changes"/>
       </form>
     </article>
@@ -78,6 +71,7 @@ header, footer, article, nav, div{
     
 
     <footer id="pageFooter">
+      To add/remove interests please join/leave interests manually!
     </footer>
   {% else %}
    <header id="pageHeader"> <h1> Sorry, user could not be found </h1> </header>
