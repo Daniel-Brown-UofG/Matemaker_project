@@ -1,8 +1,8 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
-from matemaker.models import UserProfile, Genre, Interest
-from matemaker.forms import UserForm, UserProfileForm, GenreForm, InterestForm
+from matemaker.models import UserProfile, Genre, Interest, Post
+from matemaker.forms import UserForm, UserProfileForm, GenreForm, InterestForm, PostForm
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
@@ -59,8 +59,22 @@ def leave(request, genre_name, interest_name):
     return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
 
 @login_required
-def like(request, genre_name, interest_name):
-    post = get_object_or_404(Post,id = request.Post.get('post_id'))
+def add_post(request, genre_name, interest_name):
+    interest = Interest.objects.get(slug=interest_name)
+    profile = UserProfile.objects.get(user=request.user)
+    genre = interest.genre
+    if request.method =='POST':
+        post_form=PostForm(request.POST)
+
+        if post_form.is_valid():
+            post = post_form.save()
+    else:
+        post_form=PostForm()
+    return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
+
+@login_required
+def like(request, genre_name, interest_name, post):
+    post = Post.objects.get(pk=post)
     post.likes.add(request.user)
     return redirect(reverse('matemaker:interest', kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
 

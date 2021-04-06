@@ -52,7 +52,7 @@ class Post(models.Model):
 	date = models.DateTimeField('date created',null=True)
 	likes = models.ManyToManyField(User,related_name='post_like')
 	def __str__(self):
-		return self.post.id
+		return str(self.id)
 
 	def count_like(self):
 		return self.likes.count()
