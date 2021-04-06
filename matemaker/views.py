@@ -253,7 +253,7 @@ def add_interest(request, genre_name):
         genre = None
     if genre is None:
         return redirect('/matemaker/genres/')
-    
+    https://github.com/Daniel-Brown-UofG/matemaker_project/blob/main/matemaker/views.py
     form = InterestForm()
 
     if request.method == 'POST':
@@ -264,7 +264,6 @@ def add_interest(request, genre_name):
                 interest.genre = genre
                 interest.creator = request.user
                 interest.date = timezone.now()
-                interest.members = int(interest.members)+1
                 interest.views = int(interest.views)+1
                 interest.save()
                 return redirect(reverse('matemaker:genre',  kwargs={'genre_name' : genre_name}))
