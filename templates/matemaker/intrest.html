@@ -59,7 +59,7 @@
 
 <body>
 <h1><a href="{% url 'matemaker:home' %}"> Home </a> </h1>
-  <header id="pageHeader">{{interest}} Creator:{{interest.creator}} Members:{{interest.members}}</header>
+  <header id="pageHeader">{{interest}} Creator: <a href="{% url 'matemaker:profile' interest.creator %}"> {{interest.creator}}</a> Members:{{interest.members}}</header>
   <article id="mainArticle">Posts
   <ul>
     {% get_post_list interest genre %}

@@ -52,7 +52,7 @@ header, footer, article, nav, div {
 }
 </style>
 <body>
-  <header id="pageHeader">{{ genre.name }} Creator:{{genre.creator}} Members:{{genre.members}}</header>
+  <header id="pageHeader">{{ genre.name }} Creator:<a href="{% url 'matemaker:profile' genre.creator %}">{{genre.creator}} </a>Members:{{genre.members}}</header>
   <article id="mainArticle">Instrests
   {% get_interest_list genre %}
   <div>
