@@ -26,3 +26,16 @@ def get_post_list(current_interest, current_genre):
     genre = Genre.objects.get(name=current_genre)
     posts = Post.objects.filter(interest=interest)
     return {'posts': posts, 'interest':interest, 'genre': genre}
+
+@register.inclusion_tag('matemaker/user_interests.html')
+def get_user_interests(user_profile):
+    # profile=UserProfile.objects.get(user=user_profile)
+    interests = user_profile.intersts.all()
+
+    return {'interests': interests}
+
+@register.inclusion_tag('matemaker/user_interests.html')
+def get_profile_for_edit(user):
+    profile=UserProfile.objects.get(user=user)
+    interests = profile.intersts.all()
+    return {'interests': interests}
