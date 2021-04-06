@@ -69,6 +69,13 @@
     <a href url="{% url 'matemaker:leave' genre_slug interest_slug %}">Leave</a>
   </div>
   <footer id="pageFooter">Post Something</footer>
+
+    <form action="{% url 'matemaker:like' genre_slug interest_slug %}" method=POST>
+        {% csrf_token %}
+        <button type="submit", name="post_id", value="{{ post.id }}", class="btn likebtn"><img src="{% static 'images/like.jpg' %}"
+      alt="Like" /, width="20"></button>
+    </form>
+
 </body>
 
   <div id="siteAds">

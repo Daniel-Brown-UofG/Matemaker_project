@@ -50,9 +50,12 @@ class Post(models.Model):
 	poster = models.OneToOneField(User, on_delete=models.CASCADE)
 	message = models.CharField(max_length=128, unique=False, default='Hello world!')
 	date = models.DateTimeField('date created',null=True)
-	likes = models.IntegerField(default=0)
+	likes = models.ManyToManyField(User,related_name='post_like')
 	def __str__(self):
-		return self.poster.username
+		return self.post.id
+
+	def count_like(self):
+		return self.likes.count()
 
 
 class UserProfile(models.Model):
