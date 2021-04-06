@@ -260,12 +260,15 @@ def add_interest(request, genre_name):
         form = InterestForm(request.POST)
         if form.is_valid():
             if genre:
+                profile = UserProfile.objects.get(user=request.user)
                 interest = form.save(commit=False)
                 interest.genre = genre
                 interest.creator = request.user
                 interest.date = timezone.now()
+                interest.members = int(interest.members)+1
                 interest.views = int(interest.views)+1
                 interest.save()
+                profile.intersts.add(interest)
                 return redirect(reverse('matemaker:genre',  kwargs={'genre_name' : genre_name}))
 
         else: 
