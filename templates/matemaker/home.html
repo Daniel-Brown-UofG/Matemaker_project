@@ -69,7 +69,16 @@ header, footer, article, nav, div {
 
 <div id="mainArticle">
   <h2>Biggest Communities</h2>
-    <li>{% get_genre_list %}</li> 
+    {% if genres %}
+    {% for g in genres %}
+        <div>
+		<li><a href="{% url 'matemaker:genre' g.slug %}"> {{ g.name }} </a></li>
+        </div>
+    {% endfor %}
+    
+{% else %}
+    <h1> No community found </h1>
+{% endif %}
 
 </div>
 
