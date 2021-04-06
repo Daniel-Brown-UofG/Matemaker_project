@@ -34,7 +34,7 @@ def get_user_interests(user_profile):
 
     return {'interests': interests}
 
-@register.inclusion_tag('matemaker/user_interests.html')
+@register.inclusion_tag('matemaker/user_interests_edit.html')
 def get_profile_for_edit(user):
     profile=UserProfile.objects.get(user=user)
     interests = profile.intersts.all()
