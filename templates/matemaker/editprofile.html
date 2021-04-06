@@ -16,7 +16,7 @@ body {
   height: 100vh;
   margin: 0;
   }
-header, footer, article, nav, div {
+header, footer, article, nav, div{
   padding: 1.2em;
   background: #DAAD86;
   font-family: Verdana;
@@ -33,11 +33,11 @@ header, footer, article, nav, div {
   }
 #mainNav {
   grid-area: nav;
-  } 
+  }
 #siteAds {
   grid-area: ads;
   }
-/* Stack the layout on small devices/viewports. */
+
 @media all and (max-width: 575px) {
   body {
     grid-template-areas:
@@ -53,12 +53,30 @@ header, footer, article, nav, div {
 </style>
 <body>
   {% if user %}
-    <header id="pageHeader">{{user}} Profile</header>
-    <article id="mainArticle"><img src="{{ user.picture.url }}" width="100" height="100"></article>
-    <nav id="mainNav">Intrests:
-    </nav>
+    <header id="pageHeader">Your Profile</header>
+    <article id="mainArticle">
+      <img src="{{ profile.picture.url }}" width="100" height="100">
+      <h1> {{ profile }} </h1>
+      <h1> Edit Profile Details: </h1> 
+      <form id="login_form" method="post" action="{% url 'matemaker:edit_profile' profile %}" enctype="multipart.form-data">
+        {% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+        {% endfor %}
+        {% for field in form.visible_fields %}
+            {{ field.errors }}
+            {{ field.help_text }}
+            {{ field }}
+        {% endfor %}
+        <input type="submit" name="submit" value="Confirm Changes"/>
+      </form>
+    </article>
+    
+    <nav id="mainNav">Your intrests: </nav>
     <div id="siteAds">Details:
-    <a href="{{ user.website.url }}"> {{user.website.url}} </div>
+    <a href="{{ profile.website.url }}"> {{profile.website.url}} </a></div>
+    
+
     <footer id="pageFooter">
     </footer>
   {% else %}

@@ -226,7 +226,9 @@ def add_interest(request, genre_name):
 
         else: 
             print(form.errors)
-    context_dict = {'form': form, 'genre': genre}
+
+    interest_form = InterestForm()
+    context_dict = {'form': form, 'genre': genre, 'interest_form':interest_form}
     return render(request, 'matemaker/createintrestpage.html', context_dict)
 
 
@@ -240,3 +242,35 @@ def profile_page(request, user_profile):
     except:
         context_dict['user'] = None
     return render(request, 'matemaker/profile.html', context = context_dict)
+
+@login_required
+def edit_profile(request, user_profile):
+    try:
+        user = request.user
+        print(user)
+        profile_user = User.objects.get(username=user_profile)
+        profile = UserProfile.objects.get(user=profile_user)
+        print(profile)
+    except:
+        user = None
+        profile = None
+        form = None
+        context_dict={'form': form, 'user': user, 'profile': profile}
+        return render(request, 'matemaker/editprofile.html', context_dict)
+
+    # check that the user trying to access the edit page is the profile being edited
+    if profile.user != user:
+        return redirect(reverse('matemaker:profile', kwargs={'user_profile' : user_profile}))
+    if request.method =='POST':
+        form=UserProfileForm(request.POST, instance=profile)    # get the form with perticular instance
+
+        if form.is_valid():
+            print("form was valid")
+            form.save()
+        else:
+            form = UserProfileForm(instance=profile)
+    else:
+        form = UserProfileForm(instance=profile)
+    context_dict={'form': form, 'user': user, 'profile': profile}
+    return render(request, 'matemaker/editprofile.html', context_dict)
+
