@@ -55,6 +55,7 @@ header, footer, article, nav, div{
 <body>
   {% if user %}
     <header id="pageHeader">Your Profile</header>
+    <h1><a href="{% url 'matemaker:home' %}"> Home </a> </h1>
     <article id="mainArticle">
       <img src="{{ profile.picture.url }}" width="100" height="100">
       <h1> {{ profile }} </h1>
