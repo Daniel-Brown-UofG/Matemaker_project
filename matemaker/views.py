@@ -226,6 +226,19 @@ def interest(request, genre_name, interest_name):
     context_dict['interest'] = interest
     context_dict['genre_slug'] = genre.slug
     context_dict['interest_slug'] = interest.slug
+    post_form = PostForm()
+    context_dict['post_form'] = post_form
+    if request.method =='POST':
+        post_form=PostForm(request.POST)
+
+        if post_form.is_valid():
+            print("post form was valid")
+            post = post_form.save(commit=False)
+            post.interest = interest
+            post.poster = profile.user
+            post.date = timezone.now()
+            post.save()
+            return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
 
     response = render(request, 'matemaker/intrest.html', context = context_dict)
     visitor_cookie_handler(request,response,interest)

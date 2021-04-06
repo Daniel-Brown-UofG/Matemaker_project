@@ -76,9 +76,13 @@
   </div>
   <footer id="pageFooter">
       {% if user.is_authenticated %}
-      Post Something!
-     <input class="btn btn-success" type="button" value="Make post" onclick="location.href='{% url 'matemaker:add_post' genre_slug interest_slug %}' "/>
+    <form id="post_form" method="post" action="{% url 'matemaker:add_post' genre.slug interest.slug %}">
+      {% csrf_token %}
+      <span>{{post_form.as_p}}
+        <input type="submit" name="submit" value="Post"/></span>
+      
     {% endif %}
+</form>
   </footer>
 </body>
 

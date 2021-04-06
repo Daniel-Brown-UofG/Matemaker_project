@@ -21,7 +21,7 @@ body {background-color: #659DBD;}
 
 </style>
 <div id="grid">
-<h1><a href="{% url 'matemaker:home' %}"> Home </a> </h1>
+
 {% get_genre_list %}
   {% comment %} <div>Sports</div>
   <div>Music</div>
@@ -37,4 +37,4 @@ body {background-color: #659DBD;}
 <div class= "a">
   <input class="btn btn-success" type="button" value="add genre" onclick="location.href='{% url 'matemaker:add_genre' %}' "/>
 </div>
-
+<footer id="pageFooter"><a href="{% url 'matemaker:home' %}">Home</a></footer>
