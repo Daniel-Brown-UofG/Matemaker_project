@@ -7,6 +7,7 @@
 <html>
 <head>
 <style>
+{% block style_block %}
 body {
   background-color: #659DBD;
   display: grid;
@@ -55,19 +56,20 @@ header, footer, article, nav, div {
     grid-template-columns: 1fr;
  }
 }
+{% endblock %}
 </style>
 </head>
 {% block body_block %}
   <div id= "pageHeader">
-  {% block header_block %}
+
     Matemaker Project
-  {% endblock %}
+
 </div>
 
 <div id="mainArticle">
-  {% block article_block %}
+
   Genres
-  {% endblock %}
+
 </div>
 
   <div id="siteAds">

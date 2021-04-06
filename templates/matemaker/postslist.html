@@ -1,15 +1,16 @@
 {% load staticfiles %}
 {% if posts %}
     {% for p in posts %}
-        <div>
+        <li>
         <h2> {{ p.poster }} </h2> 
-            {{ p.message }} {{p.count_like}}
+            {{ p.message }} 
             <form action="{% url 'matemaker:like' genre.slug interest.slug p %}" method=POST>
                 {% csrf_token %}
                 <button type="submit", name="post_id", value="{{ p.id }}", class="btn likebtn">
                 <img src="{% static 'images/like.jpg' %}"   alt="Like" /, width="20"></button>
+                {{p.count_like}}
             </form>
-        </div>
+        </li>
     {% endfor %}
 {% else %}
     <h1> No posts (yet!) </h1>

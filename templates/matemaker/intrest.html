@@ -58,9 +58,16 @@
 </head>
 
 <body>
+<h1><a href="{% url 'matemaker:home' %}"> Home </a> </h1>
   <header id="pageHeader">{{interest}}</header>
   <article id="mainArticle">Posts
-  {% get_post_list interest genre %}
+  <ul>
+    {% get_post_list interest genre %}
+  </ul>
+    {% if user.is_authenticated %}
+      Post Something!
+     <input class="btn btn-success" type="button" value="Make post" onclick="location.href='{% url 'matemaker:add_post' genre_slug interest_slug %}' "/>
+    {% endif %}
   </article>
   <nav id="mainNav">
     Members
@@ -71,13 +78,8 @@
     <a href url="{% url 'matemaker:leave' genre_slug interest_slug %}">Leave</a>
   </div>
   <footer id="pageFooter">
-    Post Something!
-    {% comment %} <form action="{% url 'matemaker:add_post' genre_slug interest_slug %}">
-      {% csrf_token %}
-      Content:
-      <TEXTAREA Name="content" ROWS="10" COLS="75"></TEXTAREA>
-      <input type="submit" name="submit" value="post"/>
-    </form> {% endcomment %}
+ 
+
   </footer>
 </body>
 

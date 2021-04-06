@@ -47,7 +47,7 @@ class Interest(models.Model):
 class Post(models.Model):
 
 	interest = models.ForeignKey(Interest, on_delete=models.CASCADE)
-	poster = models.OneToOneField(User, on_delete=models.CASCADE)
+	poster = models.ForeignKey(User, on_delete=models.CASCADE)
 	message = models.CharField(max_length=128, unique=False, default='Hello world!')
 	date = models.DateTimeField('date created',null=True)
 	likes = models.ManyToManyField(User,related_name='post_like')

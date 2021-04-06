@@ -63,14 +63,21 @@ def add_post(request, genre_name, interest_name):
     interest = Interest.objects.get(slug=interest_name)
     profile = UserProfile.objects.get(user=request.user)
     genre = interest.genre
+    post_form = PostForm()
     if request.method =='POST':
         post_form=PostForm(request.POST)
 
         if post_form.is_valid():
-            post = post_form.save()
+            print("post form was valid")
+            post = post_form.save(commit=False)
+            post.interest = interest
+            post.poster = profile.user
+            post.date = timezone.now()
+            post.save()
+            return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
     else:
         post_form=PostForm()
-    return redirect(reverse('matemaker:interest',  kwargs={'genre_name' : genre_name, 'interest_name' : interest_name}))
+    return render(request, 'matemaker/makepostpage.html',{'post_form':post_form,'interest' : interest, 'profile':profile, 'genre': genre} )
 
 @login_required
 def like(request, genre_name, interest_name, post):

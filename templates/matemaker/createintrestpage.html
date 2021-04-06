@@ -10,17 +10,6 @@ body {background-color: #659DBD;}
 <h1>Create Intrest for {{genre}} </h1>
 <form id="intrest_form" method="post" action="{% url 'matemaker:add_interest' genre %}">
   {% csrf_token %}
-  {% comment %} <div class = "name">
-    Intrest Name: <input type="text" name="interestname" value="" size="50" />
-  </div>
-
-    
-     <div class = "name">
-     </br>
-       Description:
-     </div>
-
-   <TEXTAREA Name="content" ROWS="10" COLS="75"></TEXTAREA> {% endcomment %}
     {{ interest_form.as_p}}
     <input type="submit" name="submit" value="Create Intrest"/>
 </form>
