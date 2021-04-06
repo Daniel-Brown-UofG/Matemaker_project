@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% extends 'matemaker/base_pages.html' %}
+{% load matemaker_template_tags %}
 {% load staticfiles %}
 {% block title_block %}
 	Home Page
@@ -63,12 +64,12 @@ header, footer, article, nav, div {
   <div id= "pageHeader">
 
     Matemaker Project
-
+    <input class="btn btn-success" type="button" value="Contact us" onclick="location.href='{% url 'matemaker:contact_us' %}' "/>
 </div>
 
 <div id="mainArticle">
-
-  Genres
+  <h2>Biggest Communities</h2>
+    <li>{% get_genre_list %}</li> 
 
 </div>
 
@@ -97,18 +98,19 @@ header, footer, article, nav, div {
   <tr>
     <th>Trending topic</th>
     <th>Genre</th>
-    <th>Members</th>
+    <th>Popularity</th>
   </tr>
+  {% if interests %}
   <tr>
-    <td>Boxing</td>
-    <td>Sport</td>
-    <td>50</td>
-  </tr>
-  <tr>
-    <td>Hollyoaks</td>
-    <td>TV</td>
-    <td>94</td>
-  </tr>
+    {% for interest in interests %}
+     
+        <th>{{ interest.name }}</th>
+        <th>{{ interest.genre.name }}</th>  
+        <th>{{ interest.views }}</th>
+      </tr>
+    {% endfor %}
+    
 </table>
+{% endif %}
 
 {% endblock %}

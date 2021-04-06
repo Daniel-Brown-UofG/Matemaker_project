@@ -52,7 +52,7 @@ header, footer, article, nav, div {
 }
 </style>
 <body>
-  <header id="pageHeader">Genre Name</header>
+  <header id="pageHeader">{{ genre.name }} Creator:{{genre.creator}} Members:{{genre.members}}</header>
   <article id="mainArticle">Instrests
   {% get_interest_list genre %}
   <div>

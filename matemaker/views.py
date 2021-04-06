@@ -28,6 +28,10 @@ def visitor_cookie_handler(request, response, interest):
 
 def home(request):
     context_dict = {}
+    interests = Interest.objects.order_by('-views')[:10]
+    genres = Genre.objects.order_by('-members')[:10]
+    context_dict['interests'] = interests
+    context_dict['genres'] = genres
     return render (request, 'matemaker/home.html', context=context_dict)
 
 def contact_us(request):
@@ -222,6 +226,7 @@ def interest(request, genre_name, interest_name):
     context_dict['interest'] = interest
     context_dict['genre_slug'] = genre.slug
     context_dict['interest_slug'] = interest.slug
+
     response = render(request, 'matemaker/intrest.html', context = context_dict)
     visitor_cookie_handler(request,response,interest)
 

@@ -59,15 +59,12 @@
 
 <body>
 <h1><a href="{% url 'matemaker:home' %}"> Home </a> </h1>
-  <header id="pageHeader">{{interest}}</header>
+  <header id="pageHeader">{{interest}} Creator:{{interest.creator}} Members:{{interest.members}}</header>
   <article id="mainArticle">Posts
   <ul>
     {% get_post_list interest genre %}
   </ul>
-    {% if user.is_authenticated %}
-      Post Something!
-     <input class="btn btn-success" type="button" value="Make post" onclick="location.href='{% url 'matemaker:add_post' genre_slug interest_slug %}' "/>
-    {% endif %}
+    
   </article>
   <nav id="mainNav">
     Members
@@ -78,8 +75,10 @@
     <a href url="{% url 'matemaker:leave' genre_slug interest_slug %}">Leave</a>
   </div>
   <footer id="pageFooter">
- 
-
+      {% if user.is_authenticated %}
+      Post Something!
+     <input class="btn btn-success" type="button" value="Make post" onclick="location.href='{% url 'matemaker:add_post' genre_slug interest_slug %}' "/>
+    {% endif %}
   </footer>
 </body>
 
