@@ -253,7 +253,6 @@ def add_interest(request, genre_name):
         genre = None
     if genre is None:
         return redirect('/matemaker/genres/')
-    https://github.com/Daniel-Brown-UofG/matemaker_project/blob/main/matemaker/views.py
     form = InterestForm()
 
     if request.method == 'POST':
