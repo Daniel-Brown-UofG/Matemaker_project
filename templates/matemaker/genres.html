@@ -35,6 +35,8 @@ body {background-color: #659DBD;}
 </div>
 
 <div class= "a">
-  <input class="btn btn-success" type="button" value="add genre" onclick="location.href='{% url 'matemaker:add_genre' %}' "/>
+  {% if user.is_authenticated %}
+    <input class="btn btn-success" type="button" value="add genre" onclick="location.href='{% url 'matemaker:add_genre' %}' "/>
+  {% endif %}
 </div>
 <footer id="pageFooter"><a href="{% url 'matemaker:home' %}">Home</a></footer>

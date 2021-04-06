@@ -113,8 +113,8 @@ header, footer, article, nav, div {
   <tr>
     {% for interest in interests %}
      
-        <th>{{ interest.name }}</th>
-        <th>{{ interest.genre.name }}</th>  
+        <th><a href="{% url 'matemaker:interest' interest.genre.slug interest.slug %}">{{ interest.name }} </a></th>
+        <th><a href="{% url 'matemaker:genre' interest.genre.slug %}">{{ interest.genre.name }} </a></th>  
         <th>{{ interest.views }}</th>
       </tr>
     {% endfor %}
