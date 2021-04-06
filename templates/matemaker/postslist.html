@@ -2,7 +2,7 @@
 {% if posts %}
     {% for p in posts %}
         <li>
-        <h2> {{ p.poster }} {{p.date}}</h2> 
+        <h2> <a href="{% url 'matemaker:profile' p.poster %}">{{ p.poster }}</a> {{p.date}}</h2> 
             {{ p.message }} 
             <form action="{% url 'matemaker:like' genre.slug interest.slug p %}" method=POST>
                 {% csrf_token %}
